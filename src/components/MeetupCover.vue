@@ -19,15 +19,22 @@ export default {
     }
   },
 
+  computed: {
+    getBgImage() {
+      return this.image ? this.image : 'var(--default-cover)';
+    }
+
+  },
+
 };
 </script>
 
 <style scoped>
 /* _meetup-cover.css */
-/* TODO: добавить v-bind в css */
+/* TODO: добавить v-bind в css */ +
 
 .meetup-cover {
-  --bg-url: var(--default-cover);
+  --bg-url: v-bind(getBgImage);
   background-size: cover;
   background-position: center;
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), var(--bg-url);

@@ -5,8 +5,8 @@
     </RouterLink>
     <!-- Ссылки гостя -->
     <RouterLink :to="{ name: 'login' }" class="nav__link">Вход</RouterLink>
-    <RouterLink :to="{ name: 'register' }" class="nav__link">Регистрация</RouterLink>
     <!-- Ссылки авторизованного пользователя -->
+    <RouterLink :to="{ name: 'register' }" class="nav__link">Регистрация</RouterLink>
     <RouterLink to="/meetups?participation=attending" class="nav__link"> Мои митапы </RouterLink>
     <RouterLink to="/meetups?participation=organizing" class="nav__link"> Организуемые митапы </RouterLink>
     <RouterLink to="/meetups/create" class="nav__link">Создать митап</RouterLink>
@@ -20,7 +20,7 @@
 // TODO: Task 05-vue-router/01-AuthPages
 /*
   TODO: Добавить работу с аутентификацией в навигации:
-        - Разные ссылки у гостя и авторизованного пользователя
+        - Разные ссылки у гостя и авторизованного пользователя +
         - Кнопка выхода
   TODO: Добавить именованные маршруты
 */

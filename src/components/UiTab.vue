@@ -1,9 +1,11 @@
 <template>
-  <div>Task UiTabs</div>
+    <RouterLink class="tabs__tab">
+      <slot />
+    </RouterLink>
 </template>
 
 <script>
-// TODO: Task UiTabs
+// TODO: Task UiTabs +
 
 export default {
   name: 'UiTab',

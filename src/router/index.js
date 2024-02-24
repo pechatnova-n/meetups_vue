@@ -48,7 +48,7 @@ export const routes = [
       },
     ],
   },
-  // TODO: Task 05-vue-router/01-AuthPages
+  // TODO: Task 05-vue-router/01-AuthPages +
   {
     path: '/login',
     name: 'login',

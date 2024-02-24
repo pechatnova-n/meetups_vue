@@ -1,6 +1,7 @@
 <template>
   <div class="page-meetup">
     <MeetupView v-if="meetup" :meetup="meetup">
+      <UiPageTitle>{{ meetup.title }}</UiPageTitle>
       <UiTabs>
         <template #tabs>
           <UiTab :to="{ name: 'meetup.description' }">Описание</UiTab>
@@ -30,11 +31,13 @@ import UiAlert from '../components/UiAlert.vue';
 import UiTabs from '../components/UiTabs.vue';
 import UiTab from '../components/UiTab.vue';
 import { getMeetup } from '../api/meetupsApi.js';
+import UiPageTitle from "@/components/UiPageTitle.vue";
 
 export default {
   name: 'PageMeetup',
 
   components: {
+    UiPageTitle,
     UiTab,
     UiTabs,
     MeetupView,
@@ -61,7 +64,7 @@ export default {
   },
 
   setup(props) {
-    // TODO: Установить <title> - "<название митапа> | Meetups"
+    // TODO: Установить <title> - "<название митапа> | Meetups" +
     const meetup = ref(null);
     const error = ref(null);
 

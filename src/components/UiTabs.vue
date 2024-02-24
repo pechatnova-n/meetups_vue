@@ -1,9 +1,12 @@
 <template>
-  <div>Task UiTabs</div>
+  <div class="tabs__content">
+    <slot name="tabs" />
+    <slot />
+  </div>
 </template>
 
 <script>
-// TODO: Task UiTabs
+// TODO: Task UiTabs +
 
 export default {
   name: 'UiTabs',
