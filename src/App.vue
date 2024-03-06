@@ -18,6 +18,7 @@ import LayoutBase from './components/LayoutBase.vue';
 import UiAlert from './components/UiAlert.vue';
 import { httpClient } from './api/httpClient/httpClient.js';
 
+
 export default {
   name: 'App',
 
@@ -41,6 +42,8 @@ export default {
 
     // TODO: обработка глобальных ошибок - необработанные исключения можно залогировать и вывести тост
     // TODO: глобальные ошибки можно поймать событиями "error" и "unhandledrejection"
+
+
   },
 };
 </script>

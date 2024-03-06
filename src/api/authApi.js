@@ -4,8 +4,13 @@ import { httpClient } from './httpClient/httpClient.js';
  * Получить текущего пользователя
  * @returns {Promise<ResultContainer<User>>}
  */
+
+
+
+
 export function getUser() {
   // TODO: реализовать функцию
+
 }
 
 /**
@@ -23,8 +28,9 @@ export function loginUser(email, password) {
  * @param {Object} user
  * @returns {Promise<ResultContainer<User>>}
  */
-export function registerUser(user) {
-  // TODO: реализовать функцию
+export function registerUser({email, fullname, password}) {
+  // TODO: реализовать функцию+
+  return httpClient.post('/auth/register', {email, fullname, password});
 }
 
 /**

@@ -1,18 +1,19 @@
 <template>
-  <UiForm>
-    <UiFormGroup label="Email">
+  <LayoutAuth title="Регистрация">
+      <UiForm @submit.prevent="handleSubmit">
+        <UiFormGroup label="Email">
       <UiInput v-model="email" name="email" type="email" required />
     </UiFormGroup>
-    <UiFormGroup label="Имя">
+        <UiFormGroup label="Имя">
       <UiInput v-model="fullname" name="fullname" required />
     </UiFormGroup>
-    <UiFormGroup label="Пароль">
+        <UiFormGroup label="Пароль">
       <UiInput v-model="password" name="password" type="password" required minlength="6" />
     </UiFormGroup>
-    <UiFormGroup label="Повтор пароля">
+        <UiFormGroup label="Повтор пароля">
       <UiInput v-model="password2" type="password" required minlength="6" />
     </UiFormGroup>
-    <UiFormGroup>
+        <UiFormGroup>
       <UiCheckbox v-model="agree" name="agree" required>Я согласен с условиями</UiCheckbox>
     </UiFormGroup>
 
@@ -22,26 +23,31 @@
 
     <template #append>
       Уже есть аккаунт?
-      <UiLink to="/login">Войдите</UiLink>
+      <UiLink :to="{ name: 'login' }">Войдите</UiLink>
     </template>
   </UiForm>
+  </LayoutAuth>
 </template>
 
 <script>
-// TODO: Task 05-vue-router/01-AuthPages
-// TODO: Добавить именованные маршруты
-import { ref } from 'vue';
+// TODO: Task 05-vue-router/01-AuthPages+
+// TODO: Добавить именованные маршруты+
+import {inject, ref} from 'vue';
 import UiFormGroup from '../components/UiFormGroup.vue';
 import UiInput from '../components/UiInput.vue';
 import UiCheckbox from '../components/UiCheckbox.vue';
 import UiLink from '../components/UiLink.vue';
 import UiButton from '../components/UiButton.vue';
 import UiForm from '../components/UiForm.vue';
+import LayoutAuth from "@/components/LayoutAuth.vue";
+import {router} from "@/router";
+import {registerUser} from "@/api/authApi";
 
 export default {
   name: 'PageRegister',
 
   components: {
+    LayoutAuth,
     UiForm,
     UiButton,
     UiLink,
@@ -51,14 +57,15 @@ export default {
   },
 
   setup() {
-    // TODO: <title> "Регистрация | Meetups"
-    // TODO: Добавить LayoutAuth
+    // TODO: <title> "Регистрация | Meetups"+
+    // TODO: Добавить LayoutAuth+
 
     const email = ref('');
     const fullname = ref('');
     const password = ref('');
     const password2 = ref('');
     const agree = ref(false);
+    const toaster = inject('toaster');
 
     const validate = () => {
       if (password.value !== password2.value) {
@@ -72,17 +79,34 @@ export default {
     const handleSubmit = async () => {
       const validationError = validate();
       if (validationError) {
-        // TODO: Вывести тост с текстом ошибки
-        return;
+        // TODO: Вывести тост с текстом ошибки+
+        return toaster().error(validationError);
       }
+
       /*
         TODO: Добавить обработчик сабмита
               - В случае успешной регистрации:
-                - Перейти на страницу входа (Task 05-vue-router/01-AuthPages)
-                - Вывести тост "Регистрация выполнена успешно"
+                - Перейти на страницу входа (Task 05-vue-router/01-AuthPages)+
+                - Вывести тост "Регистрация выполнена успешно"+
               - В случае неуспешной регистрации:
-                - Вывести тост с текстом ошибки с API
+                - Вывести тост с текстом ошибки с API+
        */
+
+    const user = {
+      email,
+      fullname,
+      password,
+    }
+
+      await registerUser({...user})
+        .then((res) => {
+            router.push('login');
+            toaster().success('Регистрация выполнена успешно');
+        })
+        .catch((err) => {
+            toaster().error(err.message);
+        })
+
     };
 
     return {

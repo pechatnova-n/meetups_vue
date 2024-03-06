@@ -1,12 +1,60 @@
 <template>
-  <div>Task 04-vue-router/02-TheToaster</div>
+  <div class="toasts" v-if="allToasts.length > 0">
+    <UiToast v-for="toast in allToasts"
+             :key="toast.id"
+             class="toast"
+             :toastType="toast.type"
+             :message="toast.message"
+    />
+  </div>
 </template>
 
 <script>
-// TODO: Task 04-vue-router/02-TheToaster
+// TODO: Task 04-vue-router/02-TheToaster+
+
+import UiToast from "@/plugins/toaster/UiToast.vue";
 
 export default {
   name: 'TheToaster',
+  components: {UiToast},
+
+  data() {
+    return {
+      allToasts: [],
+      number: 0,
+    }
+  },
+
+  methods: {
+    increment() {
+      this.number++;
+    },
+    success(message) {
+      this.increment();
+      let item = {
+        id: this.number,
+        type: 'success',
+        message: message,
+      }
+      this.allToasts.push(item);
+      setTimeout(() => {
+        this.allToasts = this.allToasts.filter(el => el.id !== item.id );
+      }, 5000)
+    },
+
+    error(message) {
+      this.increment();
+      let item = {
+        id: this.number,
+        type: 'error',
+        message: message,
+      }
+      this.allToasts.push(item);
+      setTimeout(() => {
+        this.allToasts = this.allToasts.filter(el => el.id !== item.id );
+      }, 5000)
+    },
+  }
 };
 </script>
 
@@ -44,19 +92,5 @@ export default {
   width: auto;
 }
 
-.toast + .toast {
-  margin-top: 20px;
-}
 
-.toast__icon {
-  margin-right: 12px;
-}
-
-.toast.toast_success {
-  color: var(--green);
-}
-
-.toast.toast_error {
-  color: var(--red);
-}
 </style>

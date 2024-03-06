@@ -1,8 +1,11 @@
 <template>
   <MeetupForm v-if="meetup" :meetup="meetup" />
+
   <UiContainer v-else>
     <UiAlert>Загрузка...</UiAlert>
   </UiContainer>
+
+<!--  <LayoutMeetupForm :title="meetup.title"/>-->
 </template>
 
 <script>
@@ -10,11 +13,13 @@ import { ref } from 'vue';
 import MeetupForm from '../components/MeetupForm.vue';
 import UiAlert from '../components/UiAlert.vue';
 import UiContainer from '../components/UiContainer.vue';
+import LayoutMeetupForm from "@/components/LayoutMeetupForm.vue";
 
 export default {
   name: 'PageEditMeetup',
 
   components: {
+    LayoutMeetupForm,
     UiAlert,
     UiContainer,
     MeetupForm,
