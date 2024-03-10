@@ -30,8 +30,9 @@ import UiInput from '../components/UiInput.vue';
 import UiButton from '../components/UiButton.vue';
 import UiForm from '../components/UiForm.vue';
 import LayoutAuth from "@/components/LayoutAuth.vue";
-import {loginUser} from "@/api/authApi";
+import {useAuthStore} from "@/stores/useAuthStore";
 import {router} from "@/router";
+import {loginUser} from "@/api/authApi";
 
 export default {
   name: 'PageLogin',
@@ -63,19 +64,23 @@ export default {
     const email = ref('');
     const password = ref('');
     const toaster = inject('toaster');
+    const authStore = useAuthStore();
 
-    const handleSubmit = () => {
-      loginUser(email.value, password.value)
+    const handleSubmit = async () => {
+      await loginUser(email.value, password.value)
         .then((res) => {
           if(res.success === true) {
-            router.push('/');
-            toaster().success('Авторизация прошла успешно');
+              authStore.updateUser();
+              router.push('/');
+              toaster().success('Авторизация прошла успешно');
           } else {
             return toaster().error('Неверные учётные данные...');
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => toaster().error(err.message));
     }
+
+
 
     return {
       email,

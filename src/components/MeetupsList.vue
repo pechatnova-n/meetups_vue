@@ -13,7 +13,7 @@
 </template>
 
 <script>
-// TODO: Добавить <UiTransitionGroupFade>
+// TODO: Добавить <UiTransitionGroupFade>+
 import MeetupCard from './MeetupCard.vue';
 import UiTransitionGroupFade from "@/components/UiTransitionGroupFade.vue";
 

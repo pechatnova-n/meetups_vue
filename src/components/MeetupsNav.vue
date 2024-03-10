@@ -4,30 +4,61 @@
       &larr; Вернуться к списку
     </RouterLink>
     <!-- Ссылки гостя -->
-    <RouterLink :to="{ name: 'login' }" class="nav__link">Вход</RouterLink>
+    <RouterLink v-if="!isAuthenticated" :to="{ name: 'login' }" class="nav__link">Вход</RouterLink>
     <!-- Ссылки авторизованного пользователя -->
-    <RouterLink :to="{ name: 'register' }" class="nav__link">Регистрация</RouterLink>
+    <RouterLink v-if="!isAuthenticated" :to="{ name: 'register' }" class="nav__link">Регистрация</RouterLink>
     <RouterLink to="/meetups?participation=attending" class="nav__link"> Мои митапы </RouterLink>
     <RouterLink to="/meetups?participation=organizing" class="nav__link"> Организуемые митапы </RouterLink>
     <RouterLink to="/meetups/create" class="nav__link">Создать митап</RouterLink>
-    <a href="#" class="nav__link">fullname (выйти)</a>
+    <a v-if="currentUser" href="#" class="nav__link" @click.prevent="logout">{{ currentUser.fullname }} (выйти)</a>
     <!-- Ссылка - не часть проекта -->
     <RouterLink :to="{ name: 'demo' }" class="nav__link">🎨 Components Demo</RouterLink>
   </nav>
 </template>
 
 <script>
-// TODO: Task 05-vue-router/01-AuthPages
+// TODO: Task 05-vue-router/01-AuthPages+
 /*
   TODO: Добавить работу с аутентификацией в навигации:
         - Разные ссылки у гостя и авторизованного пользователя +
-        - Кнопка выхода
-  TODO: Добавить именованные маршруты
+        - Кнопка выхода+
+  TODO: Добавить именованные маршруты+
 */
+
+
+
+import {computed} from "vue";
+import {useAuthStore} from "@/stores/useAuthStore";
+import {logoutUser} from "@/api/authApi";
 
 export default {
   name: 'MeetupsNav',
-};
+
+  setup() {
+    const authStore = useAuthStore();
+    const currentUser = computed(() => authStore.user);
+    const isAuthenticated = computed(() => authStore.isAuthenticated);
+
+
+
+    const logout = async() => {
+      await logoutUser()
+        .then((res) => {
+          authStore.updateUser();
+        })
+        .catch(e => console.log(e.message));
+    }
+
+    return {
+      logout,
+      currentUser,
+      isAuthenticated,
+    };
+  },
+
+
+
+}
 </script>
 
 <style scoped>

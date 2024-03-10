@@ -93,9 +93,9 @@ export default {
        */
 
     const user = {
-      email,
-      fullname,
-      password,
+      email: email.value,
+      fullname: fullname.value,
+      password: password.value,
     }
 
       await registerUser({...user})

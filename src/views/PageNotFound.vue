@@ -1,5 +1,6 @@
 <template>
   <div class="page-error">
+    <UiPageTitle>Страница не найдена</UiPageTitle>
     <UiContainer>
       <h2 class="page-error__title">
         <span class="page_error__status-text">Страница не найдена</span>
@@ -11,16 +12,18 @@
 
 <script>
 import UiContainer from '../components/UiContainer.vue';
+import UiPageTitle from "@/components/UiPageTitle.vue";
 
 export default {
   name: 'PageNotFound',
 
   components: {
+    UiPageTitle,
     UiContainer,
   },
 
   setup() {
-    // TODO: <title> "Страница не найдена | Meetups"
+    // TODO: <title> "Страница не найдена | Meetups"+
   },
 };
 </script>
