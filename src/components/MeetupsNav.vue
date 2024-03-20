@@ -5,11 +5,11 @@
     </RouterLink>
     <!-- Ссылки гостя -->
     <RouterLink v-if="!isAuthenticated" :to="{ name: 'login' }" class="nav__link">Вход</RouterLink>
-    <!-- Ссылки авторизованного пользователя -->
     <RouterLink v-if="!isAuthenticated" :to="{ name: 'register' }" class="nav__link">Регистрация</RouterLink>
-    <RouterLink to="/meetups?participation=attending" class="nav__link"> Мои митапы </RouterLink>
-    <RouterLink to="/meetups?participation=organizing" class="nav__link"> Организуемые митапы </RouterLink>
-    <RouterLink to="/meetups/create" class="nav__link">Создать митап</RouterLink>
+    <!-- Ссылки авторизованного пользователя -->
+    <RouterLink v-if="isAuthenticated" to="/meetups?participation=attending" class="nav__link"> Мои митапы </RouterLink>
+    <RouterLink v-if="isAuthenticated" to="/meetups?participation=organizing" class="nav__link"> Организуемые митапы </RouterLink>
+    <RouterLink v-if="isAuthenticated" to="/meetups/create" class="nav__link">Создать митап</RouterLink>
     <a v-if="currentUser" href="#" class="nav__link" @click.prevent="logout">{{ currentUser.fullname }} (выйти)</a>
     <!-- Ссылка - не часть проекта -->
     <RouterLink :to="{ name: 'demo' }" class="nav__link">🎨 Components Demo</RouterLink>
@@ -30,6 +30,7 @@
 import {computed} from "vue";
 import {useAuthStore} from "@/stores/useAuthStore";
 import {logoutUser} from "@/api/authApi";
+import {deleteLocalSession} from "@/services/authService";
 
 export default {
   name: 'MeetupsNav',
@@ -45,6 +46,7 @@ export default {
       await logoutUser()
         .then((res) => {
           authStore.updateUser();
+          deleteLocalSession('user');
         })
         .catch(e => console.log(e.message));
     }

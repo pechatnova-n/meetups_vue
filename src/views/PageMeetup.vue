@@ -4,8 +4,8 @@
       <UiPageTitle>{{ meetup.title }}</UiPageTitle>
       <UiTabs>
         <template #tabs>
-          <UiTab :to="{ name: 'meetup.description' }">Описание</UiTab>
-          <UiTab :to="{ name: 'meetup.agenda' }">Программа</UiTab>
+          <UiTab :to="{ name: 'meetup.description', params: {meetupId: meetup.id} }">Описание</UiTab>
+          <UiTab :to="{ name: 'meetup.agenda', params: {meetupId: meetup.id} }">Программа</UiTab>
         </template>
         <template #default>
           <RouterView :meetup="meetup" />

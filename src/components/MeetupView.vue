@@ -10,13 +10,15 @@
         <div class="meetup__aside">
           <MeetupInfo :organizer="meetup.organizer" :place="meetup.place" :date="meetup.date" />
           <!-- TODO: Добавить проверку на аутентификацию и является ли пользователь организатором митапа -->
-          <!-- TODO: Реализовать кнопки (некоторые должны быть ссылками) -->
+          <!-- TODO: Реализовать кнопки (некоторые должны быть ссылками)+ -->
           <div class="meetup__aside-buttons">
             <!-- TODO: Может добавить тут слот? -->
-            <UiButton variant="primary" class="meetup__aside-button">Редактировать</UiButton>
-            <UiButton variant="danger" class="meetup__aside-button">Удалить</UiButton>
-            <UiButton variant="secondary" class="meetup__aside-button">Отменить участие</UiButton>
-            <UiButton variant="primary" class="meetup__aside-button"> Участвовать </UiButton>
+            <RouterLink :to="{ name: 'editMeetup', params: { meetupId: meetup.id } }" >
+              <UiButton variant="primary" class="meetup__aside-button">Редактировать</UiButton>
+            </RouterLink>
+            <UiButton variant="danger" class="meetup__aside-button" @click="deleteMeetup">Удалить</UiButton>
+            <UiButton variant="secondary" class="meetup__aside-button" @click="deleteParticipate">Отменить участие</UiButton>
+            <UiButton variant="primary" class="meetup__aside-button" @click="participate"> Участвовать </UiButton>
           </div>
         </div>
       </div>
@@ -29,6 +31,9 @@ import MeetupCover from './MeetupCover.vue';
 import MeetupInfo from './MeetupInfo.vue';
 import UiContainer from './UiContainer.vue';
 import UiButton from './UiButton.vue';
+import {attendMeetup, deleteMeetup, leaveMeetup, putMeetup} from "@/api/meetupsApi";
+import {inject} from "vue";
+import {router} from "@/router";
 
 export default {
   name: 'MeetupView',
@@ -47,15 +52,56 @@ export default {
     },
   },
 
-  setup() {
-    // TODO: Добавить обработку кнопок, включая работу с API
+  setup(props) {
+    // TODO: Добавить обработку кнопок, включая работу с API+
     /*
       TODO: Добавить тосты при успешных операциях
-            - Митап удалён
-            - Сохранено
-            - Текст ошибки в случае ошибки на API
+            - Митап удалён+
+            - Сохранено+
+            - Текст ошибки в случае ошибки на API+
      */
     // TODO: Будет плюсом блокировать кнопку на время загрузки
+
+
+    const toaster = inject('toaster');
+
+    const participate = async () => {
+      await attendMeetup(props.meetup.id)
+        .then((res) => {
+          toaster().success('Вы добавлены в участники митапа');
+        })
+        .catch((e) => {
+          toaster().error(e.message);
+        })
+    }
+
+    const deleteParticipate = async () => {
+      await leaveMeetup(props.meetup.id)
+      .then((res) => {
+          toaster().success('Вы удалены из участников митапа');
+        })
+          .catch((e) => {
+            toaster().error(e.message);
+          })
+    }
+
+    const deleteMeetup = async () => {
+      console.log('delete')
+        await deleteMeetup(props.meetup.id)
+          .then((res) => {
+            toaster().success('Митап удален');
+            router.push({ name: 'index' });
+          })
+          .catch((e) => {
+            toaster().error(e.message);
+          })
+    }
+
+    return {
+      participate,
+      deleteParticipate,
+      deleteMeetup,
+    }
   },
 };
 </script>

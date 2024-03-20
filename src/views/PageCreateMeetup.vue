@@ -33,7 +33,6 @@ export default {
     const sendNewMeetup = async (meetup) => {
       await postMeetup(meetup)
         .then((res) => {
-          console.log(res)
           router.push({ name: "meetup", params: { meetupId: res.data.id} });
         })
         .catch(e => console.log(e.message));
