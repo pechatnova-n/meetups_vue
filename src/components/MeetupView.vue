@@ -67,7 +67,7 @@ export default {
 
     const participate = async () => {
       await attendMeetup(props.meetup.id)
-        .then((res) => {
+        .then(() => {
           toaster().success('Вы добавлены в участники митапа');
         })
         .catch((e) => {
@@ -77,7 +77,7 @@ export default {
 
     const deleteParticipate = async () => {
       await leaveMeetup(props.meetup.id)
-      .then((res) => {
+      .then(() => {
           toaster().success('Вы удалены из участников митапа');
         })
           .catch((e) => {
@@ -88,7 +88,7 @@ export default {
     const deleteMeetup = async () => {
       console.log('delete')
         await deleteMeetup(props.meetup.id)
-          .then((res) => {
+          .then(() => {
             toaster().success('Митап удален');
             router.push({ name: 'index' });
           })

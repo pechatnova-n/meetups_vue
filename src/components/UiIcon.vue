@@ -20,6 +20,7 @@ import Search from '../assets/icons/icon-search.svg';
 import Trash from '../assets/icons/icon-trash.svg';
 import Tv from '../assets/icons/icon-tv.svg';
 import User from '../assets/icons/icon-user.svg';
+import {computed} from "vue";
 
 const icons = {
   'alert-circle': AlertCircle,
@@ -52,11 +53,13 @@ export default {
     },
   },
 
-  computed: {
-    iconSrc() {
-      return icons[this.icon];
-    },
-  },
+  setup(props) {
+    const iconSrc = computed(() => icons[props.icon])
+
+    return {
+      iconSrc,
+    }
+  }
 };
 </script>
 

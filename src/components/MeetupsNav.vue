@@ -44,7 +44,7 @@ export default {
 
     const logout = async() => {
       await logoutUser()
-        .then((res) => {
+        .then(() => {
           authStore.updateUser();
           deleteLocalSession('user');
         })

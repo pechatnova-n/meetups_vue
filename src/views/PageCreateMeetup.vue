@@ -7,19 +7,17 @@
 <script>
 import { ref } from 'vue';
 import MeetupForm from '../components/MeetupForm.vue';
-import { createMeetup } from '../services/meetupService.js';
-import UiPageTitle from "@/components/UiPageTitle.vue";
+import { createMeetup } from '@/services/meetupService.js';
 import LayoutMeetupForm from "@/components/LayoutMeetupForm.vue";
 import {postMeetup} from "@/api/meetupsApi";
 import {router} from "@/router";
-import {klona} from "klona";
+
 
 export default {
   name: 'PageCreateMeetup',
 
   components: {
     LayoutMeetupForm,
-    UiPageTitle,
     MeetupForm,
   },
 

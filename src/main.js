@@ -3,7 +3,7 @@
  * Именно в этом файле запускается и инициализируется всё приложение
  */
 
-import {createApp, inject} from 'vue';
+import {createApp} from 'vue';
 import App from './App.vue';
 import { router } from './router/index.js';
 import { createToaster as toaster } from "./plugins/toaster/index.js"

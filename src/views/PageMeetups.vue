@@ -59,8 +59,8 @@ import UiButtonGroupItem from '../components/UiButtonGroupItem.vue';
 import UiFormGroup from '../components/UiFormGroup.vue';
 import UiInput from '../components/UiInput.vue';
 import UiTransitionGroupFade from '../components/UiTransitionGroupFade.vue';
-import { useMeetupsFetch } from '../composables/useMeetupsFetch.js';
-import { useMeetupsFilter } from '../composables/useMeetupsFilter.js';
+import { useMeetupsFetch } from '@/composables/useMeetupsFetch.js';
+import { useMeetupsFilter } from '@/composables/useMeetupsFilter.js';
 
 export default {
   name: 'PageMeetups',
