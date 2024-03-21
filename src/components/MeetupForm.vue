@@ -17,6 +17,7 @@
         <UiFormGroup label="Изображение">
           <UiImageUploader
             name="image"
+            :uploader="postImage"
             :preview="localMeetup.image"
             @select="localMeetup.imageToUpload = $event"
             @remove="localMeetup.imageId = localMeetup.imageToUpload = null"
@@ -68,6 +69,7 @@ import UiInput from './UiInput.vue';
 import UiInputDate from './UiInputDate.vue';
 import MeetupAgendaItemForm from './MeetupAgendaItemForm.vue';
 import { createAgendaItem } from '../services/meetupService.js';
+import {postImage} from "@/api/imageApi";
 
 export default {
   name: 'MeetupForm',
@@ -102,6 +104,7 @@ export default {
   },
 
   methods: {
+    postImage,
     addAgendaItem() {
       const newItem = createAgendaItem();
       if (this.localMeetup.agenda.length) {

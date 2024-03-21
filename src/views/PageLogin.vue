@@ -33,6 +33,7 @@ import LayoutAuth from "@/components/LayoutAuth.vue";
 import {useAuthStore} from "@/stores/useAuthStore";
 import {router} from "@/router";
 import {loginUser} from "@/api/authApi";
+import {setLocalSession} from "@/services/authService";
 
 export default {
   name: 'PageLogin',
@@ -71,6 +72,7 @@ export default {
         .then((res) => {
           if(res.success === true) {
               authStore.updateUser();
+              setLocalSession('user', res.data.fullname)
               router.push('/');
               toaster().success('Авторизация прошла успешно');
           } else {

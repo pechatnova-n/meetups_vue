@@ -7,4 +7,5 @@ import { httpClient } from './httpClient/httpClient.js';
  */
 export function postImage(file) {
   // TODO: реализовать функцию
+  return httpClient.post('/images/upload', file);
 }
