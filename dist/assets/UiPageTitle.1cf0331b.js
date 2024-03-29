@@ -1,0 +1,1 @@
+import{_ as t}from"./index.c9909d86.js";import{o,c as s,m as _}from"./vendor.30b2d013.js";const a={name:"UiPageTitle"},n={class:"title"};function c(e,r,i,d,l,p){return o(),s("h2",n,[_(e.$slots,"default",{},void 0,!0)])}const u=t(a,[["render",c],["__scopeId","data-v-820fe1d5"]]);export{u as U};
