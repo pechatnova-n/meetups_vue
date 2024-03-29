@@ -11,10 +11,12 @@
 <script>
 // TODO: Task 11-communication/01-UiButtonGroup | 11-provide-inject/01-UiButtonGroup +
 
+import {computed, inject} from "vue";
+
 export default {
   name: 'UiButtonGroupItem',
 
-  inject: ['buttonValue', 'updateButtonValue'],
+ /* inject: ['buttonValue', 'updateButtonValue'],*/
 
   props: {
     value: {
@@ -22,7 +24,25 @@ export default {
     },
   },
 
-  computed: {
+  setup(props) {
+    const buttonValue = inject('buttonValue');
+    const updateButtonValue = inject('updateButtonValue');
+
+    const isActive = computed(() => {
+      return props.value === buttonValue;
+    })
+
+    const handleUpdate = () => updateButtonValue(props.value);
+
+    return {
+      isActive,
+      handleUpdate,
+    }
+
+  }
+
+
+/*  computed: {
     isActive() {
       return this.value === this.buttonValue
     }
@@ -32,7 +52,7 @@ export default {
     handleUpdate() {
       this.updateButtonValue(this.value)
     }
-  },
+  },*/
 };
 </script>
 

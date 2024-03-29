@@ -7,7 +7,7 @@ import {computed} from "vue";
 export function authGuard(to) {
   // TODO: Task AuthGuard
   const authStore = useAuthStore();
-  const isAuthenticated = computed(() => authStore.isAuthenticated());
+  const isAuthenticated = computed(() => authStore.isAuthenticated);
 
     if (to.meta.requireGuest && isAuthenticated) {
       return {
@@ -20,5 +20,5 @@ export function authGuard(to) {
       }
     }
 
- /* return true;*/
+  return true;
 }

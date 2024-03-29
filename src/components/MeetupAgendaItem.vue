@@ -2,8 +2,7 @@
   <div class="agenda-item">
     <div class="agenda-item__col">
       <UiIcon :icon="$options.agendaItemIcons[agendaItem.type]" />
-<!--      <img :src="'/assets/icons/icon-' + $options.agendaItemIcons[agendaItem.type] + '.svg'" class="icon" alt="key" />-->
-  </div>
+    </div>
     <div class="agenda-item__col">{{ agendaItem.startsAt }} - {{ agendaItem.endsAt }}</div>
     <div class="agenda-item__col">
       <h3 class="agenda-item__title">{{ agendaItem.title ? agendaItem.title : $options.agendaItemDefaultTitles[agendaItem.type] }}</h3>

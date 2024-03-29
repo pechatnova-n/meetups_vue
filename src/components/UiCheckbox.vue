@@ -14,6 +14,8 @@
 <script>
 // TODO: Task 06-wrappers/04-UiCheckbox +
 
+import {computed} from "vue";
+
 export default {
   name: 'UiCheckbox',
 
@@ -23,16 +25,20 @@ export default {
     modelValue: [Boolean, Array, Set],
   },
 
-  computed: {
-    modelProxyValue: {
+  setup(props, { emit }) {
+    const modelProxyValue = computed( {
       get() {
-        return this.modelValue;
+        return props.modelValue;
       },
       set(value) {
-        this.$emit('update:modelValue', value);
+        emit('update:modelValue', value);
       }
-    },
-  },
+    })
+
+    return {
+      modelProxyValue,
+    }
+  }
 };
 </script>
 

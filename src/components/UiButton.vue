@@ -11,6 +11,8 @@
 <script>
 // TODO: Task 06-wrappers/02-UiButton +
 
+import {computed} from "vue";
+
 export default {
   name: 'UiButton',
 
@@ -31,16 +33,23 @@ export default {
     }
   },
 
-  computed: {
-    createClassName() {
-      return "button_" + this.variant;
-    },
-    checkType() {
-      if(this.tag === 'button') {
-        return this.type || 'button';
+  setup(props) {
+    const createClassName = computed(() => {
+      return "button_" + props.variant;
+    })
+
+
+    const checkType = computed(() => {
+      if(props.tag === 'button') {
+        return props.type || 'button';
       }
-    },
-  },
+    })
+
+    return {
+      createClassName,
+      checkType
+    }
+  }
 };
 </script>
 

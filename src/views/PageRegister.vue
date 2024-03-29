@@ -99,7 +99,7 @@ export default {
     }
 
       await registerUser({...user})
-        .then((res) => {
+        .then(() => {
             router.push('login');
             toaster().success('Регистрация выполнена успешно');
         })

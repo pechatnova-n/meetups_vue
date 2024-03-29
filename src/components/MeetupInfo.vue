@@ -42,15 +42,21 @@ export default {
     }
   },
 
-  methods: {
-    formatDateAsIso(date) {
+  setup() {
+    const formatDateAsIso = (date) => {
       return formatAsIsoDate(date);
-    },
+    }
 
-    formatDate: (date) => {
+    const formatDate = (date) => {
       return formatAsLocalDate(date);
-    },
-  },
+    }
+
+    return {
+      formatDateAsIso,
+      formatDate,
+    }
+  }
+
 };
 </script>
 

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from 'vue';
+import {ref} from 'vue';
 import MeetupForm from '../components/MeetupForm.vue';
 import UiAlert from '../components/UiAlert.vue';
 import UiContainer from '../components/UiContainer.vue';
