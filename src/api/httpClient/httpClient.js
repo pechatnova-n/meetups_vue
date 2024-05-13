@@ -3,9 +3,7 @@ import { createErrorResult, createSuccessResult } from './ResultContainer.js';
 
 export const httpClient = axios.create({
   baseURL: import.meta.env.VITE_APP_API_URL,
-  withCredentials: false,
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-/*  headers: {'Access-Control-Allow-Origin': '*'},*/
+  withCredentials: true,
   validateStatus(status) {
     /*
       401 Unauthenticated
