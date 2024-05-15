@@ -3,7 +3,6 @@ import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
-  base: '/meetups_vue/',
   plugins: [vue(), splitVendorChunkPlugin()],
 
   resolve: {
