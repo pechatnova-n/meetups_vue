@@ -4,9 +4,6 @@ import { createErrorResult, createSuccessResult } from './ResultContainer.js';
 export const httpClient = axios.create({
   baseURL: import.meta.env.VITE_APP_API_URL,
   withCredentials: true,
-  headers: {
-    'Access-Control-Allow-Origin': "https://github.com/pechatnova-n/meetups_vue",
-  },
   validateStatus(status) {
     /*
       401 Unauthenticated
