@@ -1,1 +1,0 @@
-import{_ as n}from"./index.c9909d86.js";import{o,i as s,w as a,m as r,n as _}from"./vendor.30b2d013.js";const i={name:"UiLink",props:{tag:{type:[String,Object],default:"router-link"}}};function c(e,p,t,d,l,u){return o(),s(_(t.tag),{class:"link"},{default:a(()=>[r(e.$slots,"default",{},void 0,!0)]),_:3})}const k=n(i,[["render",c],["__scopeId","data-v-89918b86"]]);export{k as U};

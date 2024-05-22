@@ -13,7 +13,7 @@ export function authGuard(to) {
       return {
         name: 'index',
       }
-    } else if (to.meta.requireAuth && !isAuthenticated) {
+    } else if (to.meta.requireAuth && !isAuthenticated.value) {
       return {
         name: 'login',
         query: { from: to.fullPath },
