@@ -8,6 +8,7 @@ import App from './App.vue';
 import { router } from './router';
 import { createToaster as toaster } from "./plugins/toaster/index.js"
 import {createPinia} from "pinia";
+import cors from 'cors';
 /*import {createProgress} from "@/plugins/progress";*/
 
 const pinia = createPinia();
@@ -19,6 +20,7 @@ createApp(App)
   .provide('toaster', toaster)
   .use(toaster)
   .use(pinia)
+  .use(cors)
   /*.use(progress)*/
   .use(router)
   .mount('#app');
