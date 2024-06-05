@@ -34,6 +34,7 @@ import {useAuthStore} from "@/stores/useAuthStore";
 import {router} from "@/router";
 import {loginUser} from "@/api/authApi";
 import {setLocalSession} from "@/services/authService";
+import {useToaster} from "@/plugins/toaster";
 
 export default {
   name: 'PageLogin',
@@ -64,8 +65,10 @@ export default {
 
     const email = ref('');
     const password = ref('');
-    const toaster = inject('toaster');
     const authStore = useAuthStore();
+    const toaster = inject('toaster');
+
+
 
     const handleSubmit = async () => {
       await loginUser(email.value, password.value)
@@ -74,12 +77,12 @@ export default {
               authStore.updateUser();
               setLocalSession('user', res.data.fullname)
               router.push('/');
-              toaster().success('Авторизация прошла успешно');
+              toaster.success('Авторизация прошла успешно');
           } else {
-            return toaster().error('Неверные учётные данные...');
+            return toaster.error('Неверные учётные данные...');
           }
         })
-        .catch(err => toaster().error(err.message));
+        .catch(error => toaster.error(error.message));
     }
 
 

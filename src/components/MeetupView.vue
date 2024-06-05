@@ -16,7 +16,7 @@
             <RouterLink :to="{ name: 'editMeetup', params: { meetupId: meetup.id } }" >
               <UiButton variant="primary" class="meetup__aside-button">Редактировать</UiButton>
             </RouterLink>
-            <UiButton variant="danger" class="meetup__aside-button" @click="deleteMeetup">Удалить</UiButton>
+            <UiButton variant="danger" class="meetup__aside-button" @click="deleteFullMeetup">Удалить</UiButton>
             <UiButton variant="secondary" class="meetup__aside-button" @click="deleteParticipate">Отменить участие</UiButton>
             <UiButton variant="primary" class="meetup__aside-button" @click="participate"> Участвовать </UiButton>
           </div>
@@ -68,39 +68,39 @@ export default {
     const participate = async () => {
       await attendMeetup(props.meetup.id)
         .then(() => {
-          toaster().success('Вы добавлены в участники митапа');
+          toaster.success('Вы добавлены в участники митапа');
         })
         .catch((e) => {
-          toaster().error(e.message);
+          toaster.err(e.message);
         })
     }
 
     const deleteParticipate = async () => {
       await leaveMeetup(props.meetup.id)
       .then(() => {
-          toaster().success('Вы удалены из участников митапа');
+          toaster.success('Вы удалены из участников митапа');
         })
           .catch((e) => {
-            toaster().error(e.message);
+            toaster.error(e.message);
           })
     }
 
-    const deleteMeetup = async () => {
+    const deleteFullMeetup = async () => {
       console.log('delete')
         await deleteMeetup(props.meetup.id)
           .then(() => {
-            toaster().success('Митап удален');
+            toaster.success('Митап удален');
             router.push({ name: 'index' });
           })
           .catch((e) => {
-            toaster().error(e.message);
+            toaster.error(e.message);
           })
     }
 
     return {
       participate,
       deleteParticipate,
-      deleteMeetup,
+      deleteFullMeetup,
     }
   },
 };

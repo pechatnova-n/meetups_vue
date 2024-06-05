@@ -42,7 +42,7 @@ export default {
       }, 5000)
     },
 
-    error(message) {
+    err(message) {
       this.increment();
       let item = {
         id: this.number,

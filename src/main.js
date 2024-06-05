@@ -6,19 +6,24 @@
 import {createApp} from 'vue';
 import App from './App.vue';
 import { router } from './router';
-import { createToaster as toaster } from "./plugins/toaster/index.js"
+
 import {createPinia} from "pinia";
+import {createToaster} from "@/plugins/toaster";
+
 /*import {createProgress} from "@/plugins/progress";*/
 
+
 const pinia = createPinia();
+const toaster = createToaster();
 /*const progress = createProgress({ container: '#progress', router });*/
 
 
 // TODO: установить плагины: router+, pinia+, head(title), toaster?+, progress+
 createApp(App)
-  .provide('toaster', toaster)
   .use(toaster)
+  .provide('toaster', toaster)
   .use(pinia)
+
   /*.use(progress)*/
   .use(router)
   .mount('#app');

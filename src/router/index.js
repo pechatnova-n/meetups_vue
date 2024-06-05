@@ -100,4 +100,4 @@ export const router = createRouter({
   scrollBehavior,
 });
 
-router.beforeEach(authGuard);
+/*router.beforeEach(authGuard);*/
